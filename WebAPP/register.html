@@ -12,19 +12,24 @@
         <form action ="">
             <h1>Registration</h1>
             <div class ="input-box">
-                <input type ="text" placeholder="Username" required>
+                <input id = "usernameInput" type ="text" placeholder="Username" required>
                 <i class='bx bx-user-circle'></i>
             </div>
             <div class ="input-box">
-                <input type ="password" placeholder="Password" required>
+                <input id = "passwordInput" type ="password" placeholder="Password" required>
                 <i class='bx bxs-lock'></i>
             </div>
             <div class ="input-box">
-                <input type ="text" placeholder="Email" required>
+                <input id ="emailInput" type ="text" placeholder="Email" required>
                 <i class='bx bx-envelope' ></i>
             </div>
-            <button type ="submit" class="btn">Register</button>
+            <div>
+                <button onclick="addUser()" type ="submit" class="btn">Register</button>
+            </div>
+            
         </form>
     </div>
+
+    <script src="webapp.js"></script>
 </body>
 </html>
