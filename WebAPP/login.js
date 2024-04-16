@@ -21,24 +21,25 @@ document.getElementById('passwordInput').addEventListener('input', handleInputCh
 
 
 async function login(){
-    if(username != " " && password != " "){
-      document.getElementById('invalidinput').textContent = " ";
-      let url = "http://localhost:8080/ThorChat/users/" + username +"/" + password; 
-        await fetch(url, { method: "GET",headers: {'Content-Type': 'application/json'}, mode : "cors" })
-        then(response => response.json())
-        .then( data => {
-          
-          console.log('Login successful:', data);
-          
-        })
-        .catch(error => {
-          console.error('Login failed:', error);
-          
-        });
+  if(username != " " && password != " "){
+    document.getElementById('invalidinput').textContent = " ";
+    let url = `http://localhost:8080/ThorChat/users/${username}/${password}`; 
+    const data ={}
+    try {
+      const response = await fetch(url, { 
+        method: "GET",
+        headers: {'Accept': 'application/json'}, 
+        cache: "default",
+        mode: "cors" 
+      });
+      data = await response.json();
+      console.log('Login successful:', data);
+    } catch(error) {
+      console.error('Login failed:', error);
     }
-    else{
-      document.getElementById('invalidinput').textContent = "Invalid Input";
-    }
+  } else {
+    document.getElementById('invalidinput').textContent = "Invalid Input";
+  }
   }
 
 

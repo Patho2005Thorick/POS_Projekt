@@ -32,7 +32,8 @@ namespace Chatapp_Desktop_Version
 
         private void Open_Registration(object sender, RoutedEventArgs e)
         {
-
+            Registration registration = new Registration();
+            registration.Show();
         }
     }
 }
