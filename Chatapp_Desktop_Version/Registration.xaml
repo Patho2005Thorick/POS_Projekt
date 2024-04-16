@@ -1,0 +1,29 @@
+﻿<Window x:Class="Chatapp_Desktop_Version.Registration"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Chatapp_Desktop_Version"
+        mc:Ignorable="d"
+        Title="Registration" Height="450" Width="800">
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="background.jpg"/>
+        </Grid.Background>
+        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="30,40" Width="420" Margin="190,24,190,0" Height="410" VerticalAlignment="Top">
+            <StackPanel>
+                <TextBlock Text="Registration" FontSize="36" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"/>
+                <StackPanel Margin="0,30,0,0">
+                    <Label Content="Username" Foreground="white"/>
+                    <TextBox  Margin="0,0,0,0" Height="35" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                    <Label Content="Password" Foreground="white"/>
+                    <PasswordBox Margin="0,0,0,0" Height="35" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                    <Label Content="Password" Foreground="white"/>
+                    <TextBox Margin="0,0,0,0" Height="35" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                </StackPanel>
+                <TextBlock x:Name="invalidInput" Foreground="Red" Background="White" TextAlignment="Center" Margin="0,6" Visibility="Hidden"/>
+                <Button Content="Register" Height="37" Background="White" Foreground="#333" FontSize="16" FontWeight="Bold" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

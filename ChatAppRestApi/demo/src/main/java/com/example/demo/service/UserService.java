@@ -18,13 +18,21 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public User getUserByID(String userId){
-        Optional<User> user = userRepository.findById(userId);
-        if(user.isPresent()){
-            return user.get();
+    public User getUser(String username, String password){
+
+        List<User> userlist = userRepository.findAll();
+        User user = new User();
+        for (User user_:userlist) {
+                if(user_.getUsername().equals(username)){
+
+                    user = user_;
+                }
+            }
+        if(user.getPassword().equals(password)){
+            return user;
         }
         else{
-            throw new RescourceNotFoundException("The User with the ID " + userId + " doesn't exist");
+            throw new RescourceNotFoundException("The User with the Name " + username + " doesn't exist");
         }
     }
 

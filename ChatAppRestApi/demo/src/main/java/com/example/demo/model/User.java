@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -64,5 +66,8 @@ public class User {
         contacts.add(contact);
     }
 
-
+    public String get(){
+        String data;
+        return data =  JsonSerialize.class.toString();
+    }
 }
