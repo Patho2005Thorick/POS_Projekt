@@ -5,24 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chatapp_Desktop_Version"
         mc:Ignorable="d"
-        Title="Registration" Height="450" Width="800">
+        Title="Registration" Height="550" Width="920">
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="background.jpg"/>
         </Grid.Background>
-        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10" Padding="30,40" Width="420" Margin="190,24,190,0" Height="400" VerticalAlignment="Top">
+        <Border BorderBrush="White" BorderThickness="2" CornerRadius="10" Padding="30,40" Width="420" Margin="250,24,250,0" Height="425" VerticalAlignment="Top">
             <StackPanel>
                 <TextBlock Text="Registration" FontSize="36" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                 <StackPanel Margin="0,30,0,0">
                     <Label Content="Username" Foreground="white"/>
-                    <TextBox x:Name="Username"  Margin="0,0,0,0" Height="35" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                    <TextBox x:Name="Username"  Margin="0,0,0,0" Height="43" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
                     <Label Content="Password" Foreground="white"/>
-                    <PasswordBox x:Name="Password" Margin="0,0,0,0" Height="35" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                    <PasswordBox x:Name="Password" Margin="0,0,0,0" Height="43" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
                     <Label Content="Email" Foreground="white"/>
-                    <TextBox x:Name="Email" Margin="0,0,0,0" Height="35" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
+                    <TextBox x:Name="Email" Margin="0,0,0,0" Height="43" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
                 </StackPanel>
                 <TextBlock x:Name="invalidInput" Foreground="Red" Background="White" TextAlignment="Center" Margin="0,0" Visibility="Hidden"/>
-                <Button Content="Register" Height="37" Background="White" Foreground="#333" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.486,-0.018" MouseDown="Registration_"/>
+                <Button Content="Register" Height="37" Background="White" Foreground="#333" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.486,-0.018" Click="Registration_"/>
             </StackPanel>
         </Border>
     </Grid>

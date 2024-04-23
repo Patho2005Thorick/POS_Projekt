@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 
 @Document
-public class ChatVerlauf {
+public class Chat {
 
     @Id private String id;
     private List<String> chatverlauf;

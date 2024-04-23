@@ -33,6 +33,9 @@ namespace Chatapp_Desktop_Version
             string username = Username.Text;
             string password = Password.Password;
             string email = Email.Text;
+            Username.Text = "";
+            Password.Password = "";
+            Email.Text = "";
             if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(email))
             {
                 try
@@ -72,6 +75,8 @@ namespace Chatapp_Desktop_Version
             {
                 Console.WriteLine("Invalid Input");
             }
+
+
         }
     }
 }

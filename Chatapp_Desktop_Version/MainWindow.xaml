@@ -10,19 +10,19 @@
         <Grid.Background>
             <ImageBrush ImageSource="/background.jpg"/>
         </Grid.Background>
-        <Border BorderBrush="Black" BorderThickness="2" CornerRadius="10"
-                 Padding="30,40" Width="420" Margin="240,29,240,50">
+        <Border BorderBrush="White" BorderThickness="2" CornerRadius="10"
+                 Padding="30,40" Width="420" Margin="240,29,240,50" >
             <StackPanel>
                 <TextBlock Text="Login" FontSize="36" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold"/>
                 <StackPanel Margin="0,30,0,0">
-                    <Label Content="Username" Foreground="white"/>
-                    <Border  BorderThickness="1" BorderBrush="white"  CornerRadius="10" Height="35">
-                        <TextBox  Margin="0,0,0,20" Height="35" FontSize="16" Background="Transparent" Foreground="White"/>
+                    <Label Content="Username" Foreground="white" FontSize="14" FontWeight="Bold"/>
+                    <Border  BorderThickness="1" BorderBrush="white"  CornerRadius="10" Height="43">
+                        <TextBox x:Name="username_input"  Margin="0,0,0,20" Height="43" FontSize="16" Background="Transparent" Foreground="White"/>
                     </Border>
 
-                    <Label Content="Password" Foreground="white"/>
-                    <Border  BorderThickness="1" BorderBrush="white"  CornerRadius="10" Height="35" Margin="0,0,0,20">
-                        <PasswordBox Height="35" FontSize="16" Background="Transparent" Foreground="White" />
+                    <Label Content="Password" Foreground="white" FontSize="14" FontWeight="Bold"/>
+                    <Border  BorderThickness="1" BorderBrush="white"  CornerRadius="10" Height="43" Margin="0,0,0,20">
+                        <PasswordBox x:Name="password_input" Height="43" FontSize="16" Background="Transparent" Foreground="White" />
                     </Border>
 
                 </StackPanel>

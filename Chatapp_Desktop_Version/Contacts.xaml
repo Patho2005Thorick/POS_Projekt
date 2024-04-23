@@ -7,6 +7,7 @@
         mc:Ignorable="d"
         Title="Contacts" Height="450" Width="800">
     <Grid>
-        
+        <Label Content="Contacts&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,29,0,0" VerticalAlignment="Top" FontSize="30" Height="50" FontWeight="Bold"/>
+
     </Grid>
 </Window>

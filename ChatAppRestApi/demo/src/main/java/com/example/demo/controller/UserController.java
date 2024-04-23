@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.model.Chat;
 import com.example.demo.model.User;
+import com.example.demo.service.ChatService;
 import com.example.demo.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.Update;
 import org.springframework.web.bind.annotation.*;
@@ -14,26 +17,35 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private ChatService chatService;
+    @Operation(summary = "GET Operation for all Users")
     @GetMapping
     public List<User> getUsers(){
 
         return userService.getUsers();
     }
-
+    @Operation(summary = "GET Operation for a single User")
     @GetMapping("/{name}/{password}")
     public User getUserById(@PathVariable String name,@PathVariable String password){
         return userService.getUser(name, password);
     }
-
+    @Operation(summary = "POST Operation to post a User")
     @PostMapping
     public User addUser(@RequestBody User user){
         return userService.createUser(user);
     }
 
-
+    @Operation(summary = "PUT Operation to update a Userprofil")
     @PutMapping("/{id}/{username}")
     public User addContact(@PathVariable String id, @PathVariable String username){
         return userService.newContact(id, username);
     }
+
+    @PostMapping("/{id}/{username}chats")
+    public Chat addChat(@RequestBody Chat chat){
+        return chatService.createChat(chat);
+    }
+   
+
 }
