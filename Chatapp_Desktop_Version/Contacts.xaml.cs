@@ -19,9 +19,21 @@ namespace Chatapp_Desktop_Version
     /// </summary>
     public partial class Contacts : Window
     {
-        public Contacts()
+        private User user = new User();
+
+        public Contacts(User currentuser)
         {
             InitializeComponent();
+            user = currentuser;
+            Contactslist.ItemsSource = user.Contacts;
+
+        }
+
+        
+
+        private void Add_Contact_Click(object sender, RoutedEventArgs e)
+        {
+            string newContact = AddContactInput.Text;
         }
     }
 }

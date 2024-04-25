@@ -5,9 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chatapp_Desktop_Version"
         mc:Ignorable="d"
-        Title="Contacts" Height="450" Width="800">
+        Title="Contacts" Height="450" Width="800" Icon="/blue_rose.png">
     <Grid>
-        <Label Content="Contacts&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,29,0,0" VerticalAlignment="Top" FontSize="30" Height="50" FontWeight="Bold"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/background.jpg"/>
+        </Grid.Background>
+        <Label Content="Contacts&#xD;&#xA;" HorizontalAlignment="Center" Margin="0,33,0,0" VerticalAlignment="Top" FontSize="40" Height="60" FontWeight="Bold" Background="{x:Null}" RenderTransformOrigin="0.5,0.5" Foreground="White">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="-0.676"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="-1.02"/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
+        <TextBox x:Name="AddContactInput" HorizontalAlignment="Left" Margin="298,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+        <Button x:Name="Add_Contact" Content="Add Contact" HorizontalAlignment="Left" Margin="511,334,0,0" VerticalAlignment="Top" Click="Add_Contact_Click" Background="White" FontWeight="Bold"/>
+        <ListBox x:Name="Contactslist" Margin="298,109,294,130" DisplayMemberPath="UserName" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505"/>
 
     </Grid>
 </Window>

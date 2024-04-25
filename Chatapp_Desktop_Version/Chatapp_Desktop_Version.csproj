@@ -9,10 +9,14 @@
 
   <ItemGroup>
     <None Remove="background.jpg" />
+    <None Remove="blue_rose.png" />
+    <None Remove="chatcontacts_background.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="background.jpg" />
+    <Resource Include="blue_rose.png" />
+    <Resource Include="chatcontacts_background.jpg" />
   </ItemGroup>
 
 </Project>

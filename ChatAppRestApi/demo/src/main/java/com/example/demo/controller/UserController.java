@@ -39,6 +39,8 @@ public class UserController {
     @Operation(summary = "PUT Operation to update a Userprofil")
     @PutMapping("/{id}/{username}")
     public User addContact(@PathVariable String id, @PathVariable String username){
+        Chat chat = new Chat();
+        addChat(chat);
         return userService.newContact(id, username);
     }
 

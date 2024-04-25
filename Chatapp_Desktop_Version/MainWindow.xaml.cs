@@ -23,6 +23,7 @@ namespace Chatapp_Desktop_Version
 
         private readonly HttpClient httpClient;
         private const string BaseUrl = "http://localhost:8080/ThorChat/users";
+        private User user;
 
 
         public MainWindow()
@@ -45,11 +46,12 @@ namespace Chatapp_Desktop_Version
                 
                 string responseBody = await response.Content.ReadAsStringAsync();
                 User user = JsonSerializer.Deserialize<User>(responseBody);
+                this.user = user;
 
                 if(username.Equals(user.UserName) && password.Equals(user.Password))
                 {
                     MessageBox.Show("Login Successfull.");
-                    Contacts contacts = new Contacts();
+                    Contacts contacts = new Contacts(user);
                     Close();
                     contacts.Show();
                     
@@ -66,6 +68,7 @@ namespace Chatapp_Desktop_Version
         private void Open_Registration(object sender, RoutedEventArgs e)
         {
             Registration registration = new Registration();
+            Close();
             registration.Show();
         }
     }
