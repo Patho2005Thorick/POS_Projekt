@@ -23,5 +23,36 @@ namespace Chatapp_Desktop_Version
         {
             InitializeComponent();
         }
+
+        private void SendMessage_Click(object sender, RoutedEventArgs e)
+        {
+            string message = MessageInput.Text;
+            // Add code here to send the message to your backend
+            // Then, add the message to the chat window
+            AddMessage(message, true); // Assuming outgoing message
+        }
+
+        private void AddMessage(string message, bool outgoing)
+        {
+            var messageElement = new TextBlock
+            {
+                Text = message,
+                Background = Brushes.LightGray, // Adjust background color as needed
+                Padding = new Thickness(5, 10,5,10),
+                MaxWidth = 400, // Adjust as needed
+                TextWrapping = TextWrapping.Wrap
+            };
+
+            if (outgoing)
+            {
+                messageElement.HorizontalAlignment = HorizontalAlignment.Right;
+            }
+            else
+            {
+                messageElement.HorizontalAlignment = HorizontalAlignment.Left;
+            }
+
+            ChatMessages.Children.Add(messageElement);
+        }
     }
 }

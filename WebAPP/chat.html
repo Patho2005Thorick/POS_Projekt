@@ -1,33 +1,31 @@
-<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" type="image/png" href="/blue_rose.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="chat_style.css">
+  <title>Thor_Chat</title>
 </head>
-<body class = "chat_contacts_background">
-    <div class="container">
-        <div class="chat-container">
-            <div class="chat">
-                <div class="message incoming">
-                    <div class="message-content">
-                        <p>Hello!</p>
-                    </div>
-                </div>
-                <div class="message outgoing">
-                    <div class="message-content">
-                        <p>Hi there!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="compose">
-                <textarea placeholder="Type a message"></textarea>
-                <button>Send</button>
-            </div>
+
+<body>
+  <header>
+    <h1>Username</h1>
+  </header>
+  <div class="container">
+    <div class="chat-window">
+      <div class="chat-area">
+        <div class="chat-messages">
+          <!-- Chat Nachrichten werden hier gezeigt -->
         </div>
+      </div>
+      <div class="user-input">
+        <input type="text" id="message-input" placeholder="Type your message...">
+        <button id="send-button">Send</button>
+      </div>
     </div>
-    <script src="webapp.js"></script>
+  </div>
+
+  <script src="JS_Code/chat.js"></script>
 </body>
+
 </html>

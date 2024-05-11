@@ -1,4 +1,6 @@
 
+
+
 let username=  ' ';
 let password =  ' ';
 
@@ -28,6 +30,9 @@ function login(e){
       console.log(url)
       $.get(url, (data, status) => {
           console.log(data);
+          if(data != null){
+            location.replace("./contacts.html")
+          }
       });
     }
   }

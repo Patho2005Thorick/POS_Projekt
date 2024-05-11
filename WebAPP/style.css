@@ -17,7 +17,7 @@ body{
 
 
 .chat_contacts_background{
-    background: url('chat&contacts_background.jpg');
+    background: url('background.jpg');
 }
 
 .wrapper{
@@ -133,7 +133,7 @@ body{
 }
 
 .chat-container {
-    border: 3px solid black;
+    border: 3px solid white;
     border-radius: 5px;
     width: 600px;
 }

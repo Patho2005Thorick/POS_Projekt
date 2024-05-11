@@ -59,6 +59,9 @@ namespace Chatapp_Desktop_Version
                         {
                             var responseData = await response.Content.ReadAsStringAsync();
                             Console.WriteLine("Registration successful: " + responseData);
+                            MainWindow main = new MainWindow();
+                            Close();
+                            main.Show();
                         }
                         else
                         {

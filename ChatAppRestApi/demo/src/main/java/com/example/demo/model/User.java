@@ -1,30 +1,24 @@
 package com.example.demo.model;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document
 public class User {
+
+
+
     @Id
-    private String id;
     private String username;
     private String email;
 
     private String password;
     private List<String> chat_IDs;
-    private List<User> contacts = new ArrayList<>();
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+    private List<String> contacts = new ArrayList<>();
 
     public String getUsername() {
         return username;
@@ -58,11 +52,11 @@ public class User {
         chat_IDs.add(chat_ID);
     }
 
-    public List<User> getContacts() {
+    public List<String> getContacts() {
         return contacts;
     }
 
-    public void setContacts(User contact) {
+    public void setContacts(String contact) {
         contacts.add(contact);
     }
 

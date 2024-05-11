@@ -6,7 +6,6 @@ import com.example.demo.service.ChatService;
 import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.repository.Update;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +26,14 @@ public class UserController {
     }
     @Operation(summary = "GET Operation for a single User")
     @GetMapping("/{name}/{password}")
-    public User getUserById(@PathVariable String name,@PathVariable String password){
+    public User getUserByName_And_Password(@PathVariable String name,@PathVariable String password){
         return userService.getUser(name, password);
+    }
+
+    @Operation(summary = "GET Operation for a single User")
+    @GetMapping("/{name}")
+    public User getUserByName(@PathVariable String name){
+        return userService.getNewContact(name);
     }
     @Operation(summary = "POST Operation to post a User")
     @PostMapping
@@ -36,15 +41,13 @@ public class UserController {
         return userService.createUser(user);
     }
 
-    @Operation(summary = "PUT Operation to update a Userprofil")
-    @PutMapping("/{id}/{username}")
-    public User addContact(@PathVariable String id, @PathVariable String username){
-        Chat chat = new Chat();
-        addChat(chat);
-        return userService.newContact(id, username);
+    @Operation(summary = "PUT Operation to add an Contact")
+    @PutMapping("/contacts")
+    public User addContact(@RequestBody String data){
+        return userService.newContact(data);
     }
 
-    @PostMapping("/{id}/{username}chats")
+    @PostMapping("/{username}/chats")
     public Chat addChat(@RequestBody Chat chat){
         return chatService.createChat(chat);
     }

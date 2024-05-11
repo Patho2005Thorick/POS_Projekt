@@ -8,18 +8,23 @@ using System.Threading.Tasks;
 namespace Chatapp_Desktop_Version
 {
     public class User
-    {
-        [JsonPropertyName("id")]
-        public string ID { get; set; }
+    { 
 
         [JsonPropertyName("username")]
         public string UserName { get; set; }
 
+
+        [JsonPropertyName("email")]
+        private string Email { get; set; }
+
         [JsonPropertyName("password")]
         public string Password { get; set; }
 
+        [JsonPropertyName("chat_IDs")]
+        private List<string> Chat_IDs { get; set; }
+
         [JsonPropertyName("contacts")]
-        public List<User> Contacts { get; set; }
+        public List<string> Contacts { get; set; }
 
         public string username()
         {
