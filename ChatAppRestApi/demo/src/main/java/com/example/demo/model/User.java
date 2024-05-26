@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -14,11 +16,26 @@ public class User {
 
     @Id
     private String username;
-    private String email;
 
     private String password;
-    private List<String> chat_IDs;
+    private List<String> chat_IDs = new ArrayList<>();
     private List<String> contacts = new ArrayList<>();
+
+
+    public User() {
+
+    }
+
+    @JsonCreator
+    public User(@JsonProperty("username") String username,
+                @JsonProperty("password") String password,
+                @JsonProperty("contacts") List<String> contacts,
+                @JsonProperty("chat_IDs") List<String> chat_IDs) {
+        this.username = username;
+        this.password = password;
+        this.contacts = contacts != null ? contacts : new ArrayList<>();
+        this.chat_IDs = chat_IDs != null ? chat_IDs : new ArrayList<>();
+    }
 
     public String getUsername() {
         return username;
@@ -26,14 +43,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getPassword() {

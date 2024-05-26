@@ -32,25 +32,23 @@ namespace Chatapp_Desktop_Version
 
             string username = Username.Text;
             string password = Password.Password;
-            string email = Email.Text;
+            
             Username.Text = "";
             Password.Password = "";
-            Email.Text = "";
-            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password) && !string.IsNullOrWhiteSpace(email))
+         
+            if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
             {
                 try
                 {
                     var url = "http://localhost:8080/ThorChat/users";
-                    var formData = new
-                    {
-                        username = username,
-                        email = email,
-                        password = password
-                    };
+                    User user = new User();
+                    user.UserName = username;
+                    user.Password = password;
+                 
 
                     using (var httpClient = new HttpClient())
                     {
-                        var json = JsonSerializer.Serialize(formData);
+                        var json = JsonSerializer.Serialize(user);
                         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                         var response = await httpClient.PostAsync(url, content);
@@ -58,14 +56,14 @@ namespace Chatapp_Desktop_Version
                         if (response.IsSuccessStatusCode)
                         {
                             var responseData = await response.Content.ReadAsStringAsync();
-                            Console.WriteLine("Registration successful: " + responseData);
+                            MessageBox.Show("Registration successful: " + responseData);
                             MainWindow main = new MainWindow();
                             Close();
                             main.Show();
                         }
                         else
                         {
-                            Console.WriteLine("Registration failed. Status Code: " + response.StatusCode);
+                            MessageBox.Show("Registration failed. Status Code: " + response.StatusCode);
                         }
                     }
                 }

@@ -22,7 +22,7 @@
         </Label>
         <TextBox x:Name="AddContactInput" HorizontalAlignment="Left" Margin="298,334,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
         <Button x:Name="Add_Contact" Content="Add Contact" HorizontalAlignment="Left" Margin="511,334,0,0" VerticalAlignment="Top" Click="Add_Contact_Click" Background="White" FontWeight="Bold"/>
-        <ListBox x:Name="Contactslist" Margin="298,109,294,130" DisplayMemberPath="UserName" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505"/>
-
+        <ListView x:Name="Contactslist" Margin="298,109,294,130" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505" SelectionChanged="Contactslist_SelectionChanged">
+        </ListView>
     </Grid>
 </Window>

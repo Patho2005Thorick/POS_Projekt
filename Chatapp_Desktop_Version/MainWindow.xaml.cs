@@ -37,6 +37,7 @@ namespace Chatapp_Desktop_Version
             string username = username_input.Text;
             string password = password_input.Password;
 
+
             string requestUrl = $"{BaseUrl}/{username}/{password}";
 
             HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
@@ -53,7 +54,16 @@ namespace Chatapp_Desktop_Version
                     MessageBox.Show("Login Successfull.");
                     Contacts contacts = new Contacts(user);
                     Close();
-                    contacts.Show();
+
+                    try
+                    {
+                        contacts.Show();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    
                     
                 }
 

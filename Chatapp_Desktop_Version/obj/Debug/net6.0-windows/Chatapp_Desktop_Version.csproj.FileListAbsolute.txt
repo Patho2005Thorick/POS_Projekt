@@ -1,4 +1,3 @@
-C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Chat.g.cs
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Contacts.g.cs
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\MainWindow.g.cs
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Registration.g.cs
@@ -10,7 +9,6 @@ C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_V
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\bin\Debug\net6.0-windows\Chatapp_Desktop_Version.runtimeconfig.json
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\bin\Debug\net6.0-windows\Chatapp_Desktop_Version.dll
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\bin\Debug\net6.0-windows\Chatapp_Desktop_Version.pdb
-C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Chat.baml
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Contacts.baml
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\MainWindow.baml
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Registration.baml
@@ -24,3 +22,5 @@ C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_V
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Chatapp_Desktop_Version.pdb
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Chatapp_Desktop_Version.genruntimeconfig.cache
 C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\ref\Chatapp_Desktop_Version.dll
+C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Chat_Fenster.g.cs
+C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\Chat_Fenster.baml

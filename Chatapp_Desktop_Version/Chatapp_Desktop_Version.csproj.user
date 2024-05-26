@@ -7,7 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Chat.xaml.cs">
+    <Compile Update="Chat_Fenster.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Contacts.xaml.cs">
@@ -18,7 +18,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Chat.xaml">
+    <Page Update="Chat_Fenster.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Contacts.xaml">

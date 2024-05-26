@@ -3,7 +3,6 @@ package com.example.demo.service;
 import com.example.demo.exception.RescourceNotFoundException;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,13 +34,7 @@ public class UserService {
     public User getUser(String username, String password){
 
         List<User> userlist = userRepository.findAll();
-        User user = new User();
-        for (User user_:userlist) {
-                if(user_.getUsername().equals(username)){
-
-                    user = user_;
-                }
-            }
+        User user = userRepository.findByUsername(username);
         if(user.getPassword().equals(password)){
             return user;
         }
@@ -55,16 +48,23 @@ public class UserService {
     }
 
     public User newContact(String data){
-        try{
+        System.out.println(data);
+        String [] datastrings = data.split(",");
+        String username = datastrings[0];
+        String newcontactname =  datastrings[1];
+        username = username.replace("\"", "");
+        newcontactname = newcontactname.replace("\"", "");
+        System.out.println(username);
+        System.out.println(newcontactname);
+        User user = userRepository.findByUsername(username);
+        User contact = userRepository.findByUsername(newcontactname);
 
-            System.out.println("Received data: " + data); // Log the received data
-            ObjectMapper objectMapper = new ObjectMapper();
-            User user = objectMapper.readValue(data, User.class);
-            return userRepository.save(user);
-        }catch(Exception ex){
-            System.out.println(""+ex);
-            return null;
+        if (user != null && contact != null && !user.getContacts().contains(newcontactname)) {
+            user.getContacts().add(newcontactname);
+            System.out.println(user.getContacts().toString());
+            userRepository.save(user);
         }
+        return user;
 
     }
 }

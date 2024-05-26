@@ -1,8 +1,6 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Chat;
 import com.example.demo.model.User;
-import com.example.demo.service.ChatService;
 import com.example.demo.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +14,7 @@ public class UserController {
 
     @Autowired
     private UserService userService;
-    @Autowired
-    private ChatService chatService;
+
     @Operation(summary = "GET Operation for all Users")
     @GetMapping
     public List<User> getUsers(){
@@ -38,6 +35,7 @@ public class UserController {
     @Operation(summary = "POST Operation to post a User")
     @PostMapping
     public User addUser(@RequestBody User user){
+        System.out.println("Received user: " + user);
         return userService.createUser(user);
     }
 
@@ -47,10 +45,7 @@ public class UserController {
         return userService.newContact(data);
     }
 
-    @PostMapping("/{username}/chats")
-    public Chat addChat(@RequestBody Chat chat){
-        return chatService.createChat(chat);
-    }
+
    
 
 }

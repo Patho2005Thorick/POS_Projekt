@@ -26,13 +26,8 @@
                     </Border>
 
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,-15,0,15">
-                    <CheckBox Foreground="White" Margin="0,3,5,0"/>
-                    <TextBlock Text="Remember me" Foreground="White"/>
-                    <TextBlock Text="Forgot password?" Foreground="White" Margin="160,0,0,0"/>
-                </StackPanel>
-                
-                    <Button Content="Login"  Background="White" Foreground="#333" FontSize="16" FontWeight="Bold" Click="Login" Margin="0,-1,0,-1" Height="35"/>
+
+                <Button Content="Login"  Background="White" Foreground="#333" FontSize="16" FontWeight="Bold" Click="Login" Margin="0,-1,0,-1" Height="35"/>
                
 
                 <StackPanel Orientation="Horizontal" Margin="0,20">

@@ -18,8 +18,6 @@
                     <TextBox x:Name="Username"  Margin="0,0,0,0" Height="43" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
                     <Label Content="Password" Foreground="white"/>
                     <PasswordBox x:Name="Password" Margin="0,0,0,0" Height="43" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
-                    <Label Content="Email" Foreground="white"/>
-                    <TextBox x:Name="Email" Margin="0,0,0,0" Height="43" FontSize="16" Background="Transparent" Foreground="White" BorderBrush="White"/>
                 </StackPanel>
                 <TextBlock x:Name="invalidInput" Foreground="Red" Background="White" TextAlignment="Center" Margin="0,0" Visibility="Hidden"/>
                 <Button Content="Register" Height="37" Background="White" Foreground="#333" FontSize="16" FontWeight="Bold" RenderTransformOrigin="0.486,-0.018" Click="Registration_"/>

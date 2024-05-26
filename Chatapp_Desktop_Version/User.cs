@@ -13,18 +13,14 @@ namespace Chatapp_Desktop_Version
         [JsonPropertyName("username")]
         public string UserName { get; set; }
 
-
-        [JsonPropertyName("email")]
-        private string Email { get; set; }
-
         [JsonPropertyName("password")]
         public string Password { get; set; }
 
         [JsonPropertyName("chat_IDs")]
-        private List<string> Chat_IDs { get; set; }
+        public List<string> Chat_IDs { get; set; } = new List<string>();
 
         [JsonPropertyName("contacts")]
-        public List<string> Contacts { get; set; }
+        public List<string> Contacts { get; set; } = new List<string>();
 
         public string username()
         {

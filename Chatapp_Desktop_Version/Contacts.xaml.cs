@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
+using System.Collections.ObjectModel;
 
 namespace Chatapp_Desktop_Version
 {
@@ -30,11 +31,28 @@ namespace Chatapp_Desktop_Version
         private const string BaseUrl2 = "http://localhost:8080/ThorChat/users";
         private User newContact = new User();
 
+        /*private ObservableCollection<string> contacts;
+
+        public ObservableCollection<string> ContactsList
+        {
+            get { return contacts; }
+            private set { contacts = value; }
+        }*/
+
         public Contacts(User currentuser)
         {
             InitializeComponent();
             user = currentuser;
-            Contactslist.ItemsSource = user.Contacts;
+
+            foreach (string contact in user.Contacts)
+            {
+              
+               
+                Contactslist.Items.Add(contact);
+            }
+           
+           // contacts = new ObservableCollection<string>(user.Contacts);
+            DataContext = this;
             httpClient = new HttpClient();
 
         }
@@ -45,11 +63,11 @@ namespace Chatapp_Desktop_Version
         {
 
 
-           
-
             try
             {
                 string newContactString = AddContactInput.Text;
+                AddContactInput.Text = null;
+                string data = user.UserName + "," + newContactString;
 
 
 
@@ -63,23 +81,21 @@ namespace Chatapp_Desktop_Version
 
                     string responseBody = await response.Content.ReadAsStringAsync();
                     newContact = JsonSerializer.Deserialize<User>(responseBody);
+                    
 
-                    if (!user.Contacts.Contains(newContact.username()))
+
+                    // Serialize the data to JSON
+
+                    if (!user.Contacts.Contains(newContact.UserName))
                     {
-                        user.Contacts.Add(newContact.username());
-                        newContact.Contacts.Add(user.username());
-                        Contactslist.ItemsSource = user.Contacts;
+                        var response1 = httpClient.PutAsJsonAsync(BaseUrl, data).Result;
 
-                        // Serialize the data to JSON
-                        string jsonData = JsonSerializer.Serialize(user);
-                        string jsonData1 = JsonSerializer.Serialize(newContact);
-
-                        var response1 = httpClient.PutAsJsonAsync(BaseUrl, jsonData).Result;
-                        var response2 = httpClient.PutAsJsonAsync(BaseUrl, jsonData1).Result;
+                        user.Contacts.Add(newContact.UserName);
+                        Contactslist.Items.Add(newContact.UserName);
+                        // ContactsList.Add(newContact.UserName);
 
 
-
-                        if (response1.IsSuccessStatusCode && response1.IsSuccessStatusCode)
+                        if (response1.IsSuccessStatusCode)
                         {
                             // Handle success
                             MessageBox.Show("Contact added successfully.");
@@ -92,19 +108,21 @@ namespace Chatapp_Desktop_Version
                     }
                     else
                     {
-                        MessageBox.Show("Contact already exists.");
+                        MessageBox.Show("Contact allready exists");
+                        foreach (string contact in user.Contacts)
+                        {
+                            MessageBox.Show(contact);
+                        }
+                        
                     }
+                      
 
-
+                        
                 }
                 else
                 {
-                    MessageBox.Show("Invalid username. Please try again.");
+                   MessageBox.Show("Contact already exists.");
                 }
-
-           
-
-            
 
             }
             catch (Exception ex)
@@ -116,5 +134,27 @@ namespace Chatapp_Desktop_Version
 
             
         }
+
+
+
+        private void Contactslist_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Contactslist.SelectedItem != null)
+            {
+                string selectedContact = Contactslist.SelectedItem.ToString();
+                Chat_Fenster chat_fenster = new Chat_Fenster(user.UserName,selectedContact);
+                Close();
+                chat_fenster.Show();
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 }
