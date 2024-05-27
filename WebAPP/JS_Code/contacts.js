@@ -1,46 +1,71 @@
-let username=  ' ';
-
-let url = "http://localhost:8080/ThorChat/users/contacts"
-
-function handleInputChange(event) {
-  const { id, value } = event.target;
-  switch (id) {
-      case 'AddUserInput':
-          username = value;
-          break;
-      default:
-          break;
-  }
-}
-
+const baseUrl = 'http://localhost:8080/ThorChat/users/contacts';
+const baseUrl2 = 'http://localhost:8080/ThorChat/users';
+let currentUser = JSON.parse(localStorage.getItem('user')); // Assuming currentUser is an object
+let username = '';
+let currentContacts = currentUser.contactList || []; // Initialize contacts list
 
 document.getElementById('AddUserInput').addEventListener('input', handleInputChange);
+document.addEventListener('DOMContentLoaded', loadContacts);
 
-function getUser(){
-    
+function handleInputChange(event) {
+    username = event.target.value;
 }
 
+async function addContact(event) {
+    event.preventDefault();
 
-/*async*/ function addContact(){
-    let newcontact = document.createElement("li");
-    let name = document.createTextNode(`${username}`);
-    newcontact.appendChild(name);
-    document.getElementById("contact_list_").appendChild(newcontact);
+    if (username.trim() === '') {
+        alert('Please enter a username');
+        return;
+    }
 
-    
+    const data = {
+        currentUser: currentUser.username,
+        newContact: username
+    };
+    const requestUrl = `${baseUrl2}/${username}`;
 
+    try {
+        const response = await fetch(requestUrl);
+        if (response.ok) {
+            const newContact = await response.json();
+
+            if (!currentContacts.includes(newContact.username)) {
+                const putResponse = await fetch(baseUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });
+
+                if (putResponse.ok) {
+                    currentContacts.push(newContact.username);
+                    updateContactList(newContact.username);
+                    alert('Contact added successfully.');
+                } else {
+                    alert('Failed to add contact.');
+                }
+            } else {
+                alert('Contact already exists.');
+            }
+        } else {
+            alert('Contact not found.');
+        }
+    } catch (error) {
+        alert('An error occurred: ' + error.message);
+    }
 }
 
+function updateContactList(contactName) {
+    const contactList = document.getElementById('contact_list_');
+    const newContact = document.createElement('li');
+    newContact.textContent = contactName;
+    contactList.appendChild(newContact);
+}
 
-async function put(url, data) { 
-  
-    // Awaiting fetch which contains method, 
-    // headers and content-type and body 
-    const response = await fetch(url, { 
-      method: 'PUT', 
-      headers: { 
-        'Content-type': 'application/json'
-      }, 
-      body: JSON.stringify(data) 
-    }); 
+function loadContacts() {
+    currentContacts.forEach(contactName => {
+        updateContactList(contactName);
+    });
 }

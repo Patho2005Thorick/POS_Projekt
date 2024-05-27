@@ -1,5 +1,4 @@
 let username=  ' ';
-let email = ' ';
 let password =  ' ';
 
 function handleInputChange(event) {
@@ -11,36 +10,30 @@ function handleInputChange(event) {
       case 'passwordInput':
           password = value;
           break;
-      case 'emailInput':
-          email = value;
-          break;
-      default:
-          break;
+    
   }
 }
 
 
 document.getElementById('usernameInput').addEventListener('input', handleInputChange);
 document.getElementById('passwordInput').addEventListener('input', handleInputChange);
-document.getElementById('emailInput').addEventListener('input', handleInputChange);
-
 
 
 
 async function addUser() {
-  if(username != " " && password != " " && email != " "){
+  if(username != " " && password != " "){
       document.getElementById('invalidinput').textContent = " ";
       let url = "http://localhost:8080/ThorChat/users" ; 
       const formData = {
       username: username,
-      email: email,
       password:password
     };
     await fetch(url, { method: "POST",  headers: {'Content-Type': 'application/json'},body: JSON.stringify(formData), mode : "cors" })
-    then(response => response.json())
+    .then(response => response.json())
     .then( data => {
       
       console.log('Registration successful:', data);
+      location.replace("./index.html");
       
     })
     .catch(error => {

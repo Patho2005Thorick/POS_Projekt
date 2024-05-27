@@ -110,6 +110,24 @@ namespace Chatapp_Desktop_Version
 
                                 currentuser.Chat_IDs.Add(currentchat.Id);
                                 contact.Chat_IDs.Add(currentchat.Id);
+
+                                var response1 = httpClient.PutAsJsonAsync(BaseUrl, data).Result;
+
+                                user.Contacts.Add(newContact.UserName);
+                                Contactslist.Items.Add(newContact.UserName);
+                                // ContactsList.Add(newContact.UserName);
+
+
+                                if (response1.IsSuccessStatusCode)
+                                {
+                                    // Handle success
+                                    MessageBox.Show("Contact added successfully.");
+                                }
+                                else
+                                {
+                                    // Handle failure
+                                    MessageBox.Show("Failed to add contact.");
+                                }
                             }
                         }
                     }
@@ -134,8 +152,12 @@ namespace Chatapp_Desktop_Version
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
 
                 HttpResponseMessage response = await httpClient.PutAsync($"{UpdateChatUrl}/{currentchat.Id}", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    MessageBox.Show("Succeded to update chat on server.");
+                }
 
-                if (!response.IsSuccessStatusCode)
+                else if (!response.IsSuccessStatusCode)
                 {
                     MessageBox.Show("Failed to update chat on server.");
                 }

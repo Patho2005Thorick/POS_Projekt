@@ -13,6 +13,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
     public List<User> getUsers(){
         return userRepository.findAll();
     }
@@ -67,4 +68,32 @@ public class UserService {
         return user;
 
     }
+
+    public User newChat(String data){
+        System.out.println(data);
+        String [] datastrings = data.split(",");
+        String username = datastrings[0];
+        String contactname =  datastrings[1];
+        String chat_id = datastrings[2];
+        username = username.replace("\"", "");
+        contactname = contactname.replace("\"", "");
+        chat_id = chat_id.replace("\"", "");
+
+        User user = userRepository.findByUsername(username);
+        User contact = userRepository.findByUsername(contactname);
+        user.getChat_IDs().add(chat_id);
+        contact.getChat_IDs().add(chat_id);
+
+        userRepository.save(user);
+        userRepository.save(contact);
+        return user;
+    }
+
+
+    public void deleteUser(String username){
+        User user  = userRepository.findByUsername(username);
+        userRepository.delete(user);
+    }
+
+
 }

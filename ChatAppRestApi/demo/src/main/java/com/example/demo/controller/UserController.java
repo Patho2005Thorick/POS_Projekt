@@ -46,6 +46,16 @@ public class UserController {
     }
 
 
-   
+    @Operation(summary = "PUT Operation to add an Contact")
+    @PutMapping("/chats")
+    public User addChat(@RequestBody String data){
+        return userService.newChat(data);
+    }
+
+    @Operation(summary = "Delete Operation to delete")
+    @DeleteMapping("/delete")
+    public void deleteUser(@RequestBody String username){
+        userService.deleteUser(username);
+    }
 
 }

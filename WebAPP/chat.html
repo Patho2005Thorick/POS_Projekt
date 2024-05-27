@@ -1,31 +1,23 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="chat_style.css">
-  <title>Thor_Chat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="chat_style.css">
+    <link rel="icon" type="image/png" href="/blue_rose.png">
 </head>
-
-<body>
-  <header>
-    <h1>Username</h1>
-  </header>
-  <div class="container">
-    <div class="chat-window">
-      <div class="chat-area">
-        <div class="chat-messages">
-          <!-- Chat Nachrichten werden hier gezeigt -->
+<body class="chat_background">
+    <div class="wrapper">
+        <div class="chat-header">
+            <h2>Chat with <span id="contact-name"></span></h2>
         </div>
-      </div>
-      <div class="user-input">
-        <input type="text" id="message-input" placeholder="Type your message...">
-        <button id="send-button">Send</button>
-      </div>
+        <div id="messages-list" class="messages-list"></div>
+        <div class="input-box">
+            <input id="message-input" type="text" placeholder="Type a message" required>
+            <button id="send-button" class="send-button">Send</button>
+        </div>
     </div>
-  </div>
-
-  <script src="JS_Code/chat.js"></script>
+    <script src="chat.js"></script>
 </body>
-
 </html>

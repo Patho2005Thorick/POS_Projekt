@@ -36,4 +36,9 @@ public class ChatService {
     public Chat getChat(String chatId) {
         return chatRepository.findById(chatId).orElseThrow(() -> new RescourceNotFoundException("Chat not found"));
     }
+
+    public void deleteChat(String chatId){
+        Chat chat = chatRepository.findById(chatId).orElseThrow(() -> new RescourceNotFoundException("Chat not found"));;
+        chatRepository.delete(chat);
+    }
 }

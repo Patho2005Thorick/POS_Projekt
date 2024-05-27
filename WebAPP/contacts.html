@@ -7,26 +7,21 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/png" href="/blue_rose.png">
 </head>
-<body class = "chat_contacts_background">
-    <div class ="wrapper">
-        <div id = "contact_list">
+<body class="chat_contacts_background">
+    <div class="wrapper">
+        <div id="contact_list">
             <h2>Contacts List</h2>
             <div id="contacts">
-                <ul id = "contact_list_">
-                    
-                  </ul>
+                <ul id="contact_list_"></ul>
             </div>
-            <form action="">
-                <div class ="input-box">
-                    <input id = "AddUserInput" type ="Text" placeholder="New Friend" required>
-                    <i class='bx bxs-lock'></i>
-                    <button class="add-contact" type="submit"onclick="addContact()">Add Contact</button>
+            <form onsubmit="addContact(event)">
+                <div class="input-box">
+                    <input id="AddUserInput" type="text" placeholder="New Friend" required>
+                    <button class="add-contact" type="submit">Add Contact</button>
                 </div>
             </form>
-                
-               
         </div>
     </div>
-    <script src="JS_Code/contacts.js"></script>
+    <script src="./JS_Code/contacts.js"></script>
 </body>
 </html>

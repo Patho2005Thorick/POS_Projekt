@@ -31,6 +31,7 @@ function login(e){
       $.get(url, (data, status) => {
           console.log(data);
           if(data != null){
+            localStorage.setItem('user', JSON.stringify(data));
             location.replace("./contacts.html")
           }
       });
