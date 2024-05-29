@@ -1,20 +1,20 @@
 ﻿Chatapp_Desktop_Version
-1.0.0.0
+
 
 winexe
 C#
 .cs
-c:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\
+C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\obj\Debug\net6.0-windows\
 Chatapp_Desktop_Version
 none
 false
-TRACE;DEBUG;NET;NET6_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
-c:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\App.xaml
+TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+C:\Users\Patrick\OneDrive - HTL Saalfelden\Desktop\POS_Projekt\Chatapp_Desktop_Version\App.xaml
 4-724669334
 
-11-1954317769
+92052899062
 194183970531
 Chat_Fenster.xaml;Contacts.xaml;MainWindow.xaml;Registration.xaml;
 
-True
+False
 

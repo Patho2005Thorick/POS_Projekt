@@ -38,13 +38,3 @@ function login(e){
     }
   }
 
-
-
-
-
-
-
-
-
-
-

@@ -22,7 +22,7 @@ public class ChatController {
     }
 
     @PostMapping("/{chatId}/message")
-    public Chat sendMessage(@PathVariable String chatId, @RequestBody Message message) {
+    public Chat sendMessage(@PathVariable String chatId, @RequestBody Message message)  {
         return chatService.sendMessage(chatId, message);
     }
 

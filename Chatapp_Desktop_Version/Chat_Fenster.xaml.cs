@@ -31,7 +31,8 @@ namespace Chatapp_Desktop_Version
         private User contact;
         private const string BaseUrl = "http://localhost:8080/ThorChat/users";
         private const string BaseUrl2 = "http://localhost:8080/ThorChat/chats/create";
-        private const string UpdateChatUrl = "http://localhost:8080/ThorChat/chats/update"; // Assuming you have this endpoint
+        private const string GetChatUrl = "http://localhost:8080/ThorChat/chats";
+        private const string UpdateChatUrl = "http://localhost:8080/ThorChat/chats/update";
 
         public Chat_Fenster(string userName, string contactName)
         {
@@ -47,142 +48,156 @@ namespace Chatapp_Desktop_Version
             // Bind Messages to the ListView
             MessagesListView.ItemsSource = Messages;
 
-            // Register the closing event
-            this.Closing += Chat_Fenster_Closing;
         }
+
+        
 
         private async void function()
         {
             try
             {
-                string requestUrl = $"{BaseUrl}/{userName}";
+                // Construct request URLs
+                string currentUserUrl = $"{BaseUrl}/{userName}";
+                string contactUrl = $"{BaseUrl}/{contactName}";
 
-                HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
+                // Create tasks for both requests
+                var currentUserTask = httpClient.GetAsync(currentUserUrl);
+                var contactTask = httpClient.GetAsync(contactUrl);
 
-                if (response.IsSuccessStatusCode)
+                // Await both tasks
+                await Task.WhenAll(currentUserTask, contactTask);
+
+                var currentUserResponse = await currentUserTask;
+                var contactResponse = await contactTask;
+
+                if (currentUserResponse.IsSuccessStatusCode && contactResponse.IsSuccessStatusCode)
                 {
-                    string responseBody = await response.Content.ReadAsStringAsync();
-                    currentuser = JsonSerializer.Deserialize<User>(responseBody);
+                    string currentUserBody = await currentUserResponse.Content.ReadAsStringAsync();
+                    string contactBody = await contactResponse.Content.ReadAsStringAsync();
 
-                    requestUrl = $"{BaseUrl}/{contactName}";
+                    currentuser = JsonSerializer.Deserialize<User>(currentUserBody);
+                    contact = JsonSerializer.Deserialize<User>(contactBody);
 
-                    response = await httpClient.GetAsync(requestUrl);
-                    // Serialize the data to JSON
+                    bool chatFound = false;
 
-                    if (response.IsSuccessStatusCode)
+                    // Find a common Chat_ID
+                    foreach (string id in currentuser.Chat_IDs)
                     {
-                        responseBody = await response.Content.ReadAsStringAsync();
-                        contact = JsonSerializer.Deserialize<User>(responseBody);
-
-                        foreach (string id in currentuser.Chat_IDs)
+                        foreach (string id2 in contact.Chat_IDs)
                         {
-                            foreach (string id2 in contact.Chat_IDs)
-                            {
-                                if (id.Equals(id2))
-                                {
-                                    currentchat.Id = id2;
-                                    break;
-                                }
-                            }
-                            if (!string.IsNullOrEmpty(currentchat.Id))
+                            if (chatFound)
                             {
                                 break;
                             }
-                        }
-
-                        if (string.IsNullOrEmpty(currentchat.Id))
-                        {
-                            List<string> participants = new List<string>
+                            else if (id.Equals(id2))
                             {
-                                currentuser.UserName,
-                                contact.UserName
-                            };
+                                // Common Chat_ID found
+                                string chatUrl = $"{GetChatUrl}/{id}";
+                                HttpResponseMessage chatResponse = await httpClient.GetAsync(chatUrl);
 
-                            var json = JsonSerializer.Serialize(participants);
-                            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                            response = await httpClient.PostAsync(BaseUrl2, content);
-
-                            if (response.IsSuccessStatusCode)
-                            {
-                                responseBody = await response.Content.ReadAsStringAsync();
-                                currentchat = JsonSerializer.Deserialize<Chat>(responseBody);
-
-                                currentuser.Chat_IDs.Add(currentchat.Id);
-                                contact.Chat_IDs.Add(currentchat.Id);
-
-                                var response1 = httpClient.PutAsJsonAsync(BaseUrl, data).Result;
-
-                                user.Contacts.Add(newContact.UserName);
-                                Contactslist.Items.Add(newContact.UserName);
-                                // ContactsList.Add(newContact.UserName);
-
-
-                                if (response1.IsSuccessStatusCode)
+                                if (chatResponse.IsSuccessStatusCode)
                                 {
-                                    // Handle success
-                                    MessageBox.Show("Contact added successfully.");
+                                    string chatBody = await chatResponse.Content.ReadAsStringAsync();
+                                    currentchat = JsonSerializer.Deserialize<Chat>(chatBody);
+
+                                    foreach (Message message in currentchat.Messages)
+                                    {
+                                        Messages.Add(message.Content);
+                                    }
+                                   
+                                    chatFound = true;
                                 }
-                                else
-                                {
-                                    // Handle failure
-                                    MessageBox.Show("Failed to add contact.");
-                                }
+                                break;
                             }
+                        }
+                        if (chatFound)
+                        {
+                            break;
+                        }
+                    }
+
+                    // If no common chat was found, create a new chat
+                    if (!chatFound)
+                    {
+                        List<string> participants = new List<string>
+                        {
+                            currentuser.UserName,
+                            contact.UserName
+                        };
+
+                        var json = JsonSerializer.Serialize(participants);
+                        var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                        HttpResponseMessage createChatResponse = await httpClient.PostAsync(BaseUrl2, content);
+
+                        if (createChatResponse.IsSuccessStatusCode)
+                        {
+                            string chatBody = await createChatResponse.Content.ReadAsStringAsync();
+                            currentchat = JsonSerializer.Deserialize<Chat>(chatBody);
+                            MessageBox.Show("Chat added successfully.");
+                        }
+                        else
+                        {
+                            // Handle failure
+                            MessageBox.Show("Failed to add chat.");
                         }
                     }
                 }
                 else
                 {
-                    MessageBox.Show("A Problem has occurred.");
+                    MessageBox.Show("Failed to get user or contact details.");
                 }
             }
             catch (Exception ex)
             {
-                string s = ex.Message;
-                MessageBox.Show("" + ex);
+                MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
 
-        private async void Chat_Fenster_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            try
-            {
-                var json = JsonSerializer.Serialize(currentchat);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = await httpClient.PutAsync($"{UpdateChatUrl}/{currentchat.Id}", content);
-                if (response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Succeded to update chat on server.");
-                }
 
-                else if (!response.IsSuccessStatusCode)
-                {
-                    MessageBox.Show("Failed to update chat on server.");
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error updating chat on server: " + ex.Message);
-            }
-        }
-
-        private void SendButton_Click(object sender, RoutedEventArgs e)
+        private  async void SendButton_Click(object sender, RoutedEventArgs e)
         {
             if (!string.IsNullOrEmpty(MessageTextBox.Text))
             {
                 string timestamp = $"{DateTime.Now:dd HH:mm}";
-                Messages.Add($"Me: {MessageTextBox.Text}\n\t\t\t\t {timestamp}");
+                Messages.Add($"Me: {MessageTextBox.Text}");
+
+                Random rm = new Random();
+               int randomId =  rm.Next(100000, 500000);
 
                 Message message = new Message
                 {
+                    Id = $"{randomId}",
                     Sender = currentuser.UserName,
                     Content = MessageTextBox.Text,
-                    Timestamp = DateTime.Now
                 };
 
-                currentchat.Messages.Add(message);
+               
+                try
+                {
+                    
+                    currentchat.Messages.Add(message);
+                    var json = JsonSerializer.Serialize(currentchat);
+                    var content = new StringContent(json, Encoding.UTF8, "application/json");
+                    MessageBox.Show(json);
+                    
+
+                    var response = httpClient.PutAsync($"{UpdateChatUrl}/{currentchat.Id}", content).Result;
+                    if (response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Succeded to update chat on server.");
+                    }
+
+                    else if (!response.IsSuccessStatusCode)
+                    {
+                        MessageBox.Show("Failed to update chat on server.");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error updating chat on server: " + ex.Message);
+                }
                 MessageTextBox.Clear();
             }
         }

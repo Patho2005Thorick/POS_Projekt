@@ -1,18 +1,28 @@
 package com.example.demo.model;
 
-import java.util.Date;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+@Document
 public class Message {
+
+    @Id
+    private String id;
     private String sender;
     private String content;
-    private Date timestamp;
 
     public Message() {}
 
     public Message(String sender, String content) {
         this.sender = sender;
         this.content = content;
-        this.timestamp = new Date();
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public String getContent() {
+        return content;
     }
 
 }

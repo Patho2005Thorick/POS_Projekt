@@ -14,6 +14,11 @@ public class Chat {
     private List<String> participants = new ArrayList<>();
     private List<Message> messages = new ArrayList<>();
 
+
+    public String getId() {
+        return id;
+    }
+
     public List<String> getParticipants() {
         return participants;
     }
