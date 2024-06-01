@@ -14,115 +14,54 @@ Die API ist eine Spring Boot Rest API welche über Endpoints es ermöglicht
 ### Klassendiagramm des WPF-Clients
 ```mermaid
 classDiagram
-    Home o-- Login
-    Home o-- Register
-    Home o-- PaswordForgotten
-    Home o-- Delete
-    Home o-- Chat
-    Home o-- Message
+    Chat_Fenster --> Chat
+    Chat_Fenster --> Message
+    Chat_Fenster --> User
+    Chat_Fenster --> Contacts
+    
+    Contacts --> User
+    
+    MainWindow --> User
+    MainWindow --> Contacts
+    
+    Registration --> User
+    
+    Chat --> Message
+    Chat --> User
+    
+    User --> Chat
+    User --> Message
+
+  
 ```
 
 ### Klassendiagramm des WebApp-Clients
 ```mermaid
-classDiagram
-  Home o-- Login-Register-PasswortForgotten-Delete
-  Home o-- Chat
-  Home o-- Message
+    Home o-- Login
+    Login o-- Register
+    Register o-- Login
+    Login o-- Contacts
+    Contacts o-- Chat
+  
 ```
 
 ### Klassendiagramm des Spring-Boot Servers
-```
+```mermaid
 classDiagram
-    class ChatController {
-        +ChatService chatService
-        +createChat(List<String> participants) Chat
-        +sendMessage(String chatId, Message message) Chat
-        +updateChat(String chatId, Chat chat) Chat
-        +getChat(String chatId) Chat
-        +deleteChat(String data) User
-    }
-
-    class UserController {
-        +UserService userService
-        +getUsers() List<User>
-        +getUserByName_And_Password(String name, String password) User
-        +getUserByName(String name) User
-        +addUser(User user) User
-        +addContact(String data) User
-        +addChat(String data) User
-        +deleteUser(String username)
-    }
-
     ChatController --> ChatService
     UserController --> UserService
-classDiagram
-    class ChatService {
-        +ChatRepository chatRepository
-        +UserRepository userRepository
-        +createChat(List<String> participants) Chat
-        +sendMessage(String chatId, Message message) Chat
-        +updateChat(String chatId, Chat updatedChat) Chat
-        +getChat(String chatId) Chat
-        +deleteChat(String data) User
-    }
-
-    class UserService {
-        +UserRepository userRepository
-        +getUsers() List<User>
-        +getNewContact(String username) User
-        +getUser(String username, String password) User
-        +createUser(User user) User
-        +newContact(String data) User
-        +newChat(String data) User
-        +deleteUser(String username)
-    }
-
+    
     ChatService --> ChatRepository
     ChatService --> UserRepository
     UserService --> UserRepository
-
-classDiagram
-    class Chat {
-        +String id
-        +List<String> participants
-        +List<Message> messages
-    }
-
-    class Message {
-        +String id
-        +String sender
-        +String content
-    }
-
-    class User {
-        +String username
-        +String password
-        +List<String> chat_IDs
-        +List<String> contacts
-    }
-
+    
     Chat --> Message
     User --> Chat
-
-classDiagram
-    class ChatRepository {
-        +findByParticipantsContaining(String userId) List<Chat>
-    }
-
-    class UserRepository {
-        +findByUsername(String username) User
-    }
-
+    
     ChatRepository --> Chat
     UserRepository --> User
-
-classDiagram
-    class RescourceNotFoundException {
-        +RescourceNotFoundException(String message)
-    }
-
+    
     RescourceNotFoundException --> RuntimeException
-
 
 ```
 
