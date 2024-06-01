@@ -37,7 +37,6 @@ classDiagram
 
 ### Klassendiagramm des WebApp-Clients
 ```mermaid
-    Home o-- Login
     Login o-- Register
     Register o-- Login
     Login o-- Contacts
