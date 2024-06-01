@@ -31,19 +31,99 @@ classDiagram
 ```
 
 ### Klassendiagramm des Spring-Boot Servers
-```mermaid
+```
 classDiagram
-    Application o-- ChatController
-    ChatController o-- ChatService
-    ChatService o-- User
-    ChatService o-- Chat
-    ChatService o-- Message
-    ChatService o-- UserRepository
-    ChatService o-- ChatRepository
-    ChatService o-- MessageRepository
-    MongoDBRepository <-- ChatRepository
-    MongoDBRepository <-- MessageRepository
-    MongoDBRepository <-- UserRepository
+    class ChatController {
+        +ChatService chatService
+        +createChat(List<String> participants) Chat
+        +sendMessage(String chatId, Message message) Chat
+        +updateChat(String chatId, Chat chat) Chat
+        +getChat(String chatId) Chat
+        +deleteChat(String data) User
+    }
+
+    class UserController {
+        +UserService userService
+        +getUsers() List<User>
+        +getUserByName_And_Password(String name, String password) User
+        +getUserByName(String name) User
+        +addUser(User user) User
+        +addContact(String data) User
+        +addChat(String data) User
+        +deleteUser(String username)
+    }
+
+    ChatController --> ChatService
+    UserController --> UserService
+classDiagram
+    class ChatService {
+        +ChatRepository chatRepository
+        +UserRepository userRepository
+        +createChat(List<String> participants) Chat
+        +sendMessage(String chatId, Message message) Chat
+        +updateChat(String chatId, Chat updatedChat) Chat
+        +getChat(String chatId) Chat
+        +deleteChat(String data) User
+    }
+
+    class UserService {
+        +UserRepository userRepository
+        +getUsers() List<User>
+        +getNewContact(String username) User
+        +getUser(String username, String password) User
+        +createUser(User user) User
+        +newContact(String data) User
+        +newChat(String data) User
+        +deleteUser(String username)
+    }
+
+    ChatService --> ChatRepository
+    ChatService --> UserRepository
+    UserService --> UserRepository
+
+classDiagram
+    class Chat {
+        +String id
+        +List<String> participants
+        +List<Message> messages
+    }
+
+    class Message {
+        +String id
+        +String sender
+        +String content
+    }
+
+    class User {
+        +String username
+        +String password
+        +List<String> chat_IDs
+        +List<String> contacts
+    }
+
+    Chat --> Message
+    User --> Chat
+
+classDiagram
+    class ChatRepository {
+        +findByParticipantsContaining(String userId) List<Chat>
+    }
+
+    class UserRepository {
+        +findByUsername(String username) User
+    }
+
+    ChatRepository --> Chat
+    UserRepository --> User
+
+classDiagram
+    class RescourceNotFoundException {
+        +RescourceNotFoundException(String message)
+    }
+
+    RescourceNotFoundException --> RuntimeException
+
+
 ```
 
 
@@ -65,12 +145,10 @@ classDiagram
 #### [HTML](https://www.w3schools.com/html/)
 #### [CSS](https://www.w3schools.com/css/default.asp)
 #### [JAVASCRIPT](https://www.w3schools.com/js/default.asp)
-#### [JAVASCRIPT](https://www.geeksforgeeks.org/how-to-make-simple-put-request-using-fetch-api-by-making-custom-http-library/)
 
 ### Spring-Boot Rest API
 
 #### [Spring-Boot Rest](https://www.youtube.com/watch?v=e-TIQnK2Qg4&list=PL4G5QRcvyrs9OoyIGfdLnQq1ACd-NkDKU&index=2)
-#### [Spring-Boot Rest](https://spring.io/guides/tutorials/rest)
 #### [Spring Dependencies](https://start.spring.io/)
 
 ### IDES
