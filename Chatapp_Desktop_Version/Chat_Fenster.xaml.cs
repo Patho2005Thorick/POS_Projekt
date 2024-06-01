@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
+using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
@@ -201,6 +202,41 @@ namespace Chatapp_Desktop_Version
                 MessageTextBox.Clear();
             }
         }
+
+        private async void Delete_Chat(object sender, RoutedEventArgs e)
+        {
+            /*Wenn der User einen Chat löscht dann kann er nicht mehr auf den Chat zugreifen
+             * weil er nicht mehr die ChatID hat. DIe Datenbank selber ist aber noch in der Datenbank gespeichert.
+             */
+            Messages = null;
+            string DeleteUrl = "http://localhost:8080/ThorChat/chats/delete";
+            string data = $"{currentchat.Id},{currentuser.UserName}";
+            var content = new StringContent(data, Encoding.UTF8, "application/json");
+            var response = httpClient.PutAsync(DeleteUrl, content).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Succeded to delete the chat.");
+                Contacts contacts = new Contacts(currentuser);
+                Close();
+
+                try
+                {
+                    contacts.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+
+            else if (!response.IsSuccessStatusCode)
+            {
+                MessageBox.Show("Failed to delete the chat");
+            }
+           
+        }
+
+       
     }
 
    

@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Chat;
 import com.example.demo.model.Message;
+import com.example.demo.model.User;
 import com.example.demo.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +37,8 @@ public class ChatController {
         return chatService.getChat(chatId);
     }
 
-    @DeleteMapping("/delete")
-    public void deleteChat(@RequestBody String chatId){
-        chatService.deleteChat(chatId);
+    @PutMapping("/delete")
+    public User deleteChat(@RequestBody String data){
+        return chatService.deleteChat(data);
     }
 }

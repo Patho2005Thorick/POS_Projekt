@@ -51,8 +51,13 @@ public class ChatService {
         return chatRepository.findById(chatId).orElseThrow(() -> new RescourceNotFoundException("Chat not found"));
     }
 
-    public void deleteChat(String chatId){
+    public User deleteChat(String data){
+        String [] dataStrings = data.split(",");
+        String chatId = dataStrings[0];
+        String userId = dataStrings[1];
         Chat chat = chatRepository.findById(chatId).orElseThrow(() -> new RescourceNotFoundException("Chat not found"));;
-        chatRepository.delete(chat);
+        User user = userRepository.findById(userId).orElseThrow(() -> new RescourceNotFoundException("User not found"));;
+        user.getChat_IDs().remove(chat.getId());
+        return userRepository.save(user);
     }
 }

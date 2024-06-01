@@ -4,71 +4,110 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: url('background.jpg');
+  margin: 0;
+  background: url('background.jpg') no-repeat center center fixed;
   background-size: cover;
-  background-position: center;
 }
 
 .wrapper {
-  background: rgba(255, 255, 255, 0.8);
-  padding: 20px;
-  border-radius: 10px;
-  width: 80%;
-  max-width: 600px;
+  width: 800px;
+  height: 550px;
 }
 
-.chat-header {
-  text-align: center;
-  margin-bottom: 20px;
+.border {
+  border: 3px solid white;
+  border-radius: 5px;
+  margin: 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.inner-border {
+  border: 1px solid white;
+  border-radius: 5px;
+  margin: 10px 10px 20px 10px;
+  height: calc(100% - 20px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr auto;
+  height: 100%;
+}
+
+.messages-list-container {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  display: flex;
+  flex-direction: column;
 }
 
 .messages-list {
-  height: 300px;
-  overflow-y: scroll;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  background-color: #fff;
+  flex-grow: 1;
+  margin: 10px;
+  border: 3px solid white;
+  background-color: #050505;
+  color: white;
+  font-weight: bold;
+  overflow-y: auto;
 }
 
-.message {
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-.message.me {
-  background-color: #e0f7fa;
-  text-align: right;
-}
-
-.message.other {
-  background-color: #f0f4c3;
-}
-
-.input-box {
+.input-container {
+  grid-column: 2 / 3;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  margin: 0 10px;
 }
 
-.input-box input {
-  flex: 1;
-  padding: 10px;
+.message-input {
+  flex-grow: 1;
+  height: 50px;
+  border: 3px solid white;
+  background-color: #050505;
+  color: white;
+  font-weight: bold;
   margin-right: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.input-box button {
-  padding: 10px 20px;
+.send-button {
+  height: 50px;
   background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.send-button:hover {
+  background-color: #45a049;
+}
+
+.button-container {
+  grid-column: 3 / 4;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 60px;
+}
+
+.delete-button {
+  height: 30px;
+  width: 86px;
+  background-color: red;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.input-box button:hover {
-  background-color: #45a049;
+.delete-button:hover {
+  background-color: darkred;
 }

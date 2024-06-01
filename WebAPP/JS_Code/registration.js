@@ -1,3 +1,17 @@
+
+class User {
+  constructor(username, password, chatIDs = [], contacts = []) {
+      this.username = username;
+      this.password = password;
+      this.chatIDs = chatIDs;
+      this.contacts = contacts;
+  }
+
+  getUsername() {
+      return this.username;
+  }
+}
+
 let username=  ' ';
 let password =  ' ';
 
@@ -24,23 +38,16 @@ async function addUser() {
   if(username != " " && password != " "){
       document.getElementById('invalidinput').textContent = " ";
       let url = "http://localhost:8080/ThorChat/users" ; 
-      const formData = {
-      username: username,
-      password:password
-    };
-    await fetch(url, { method: "POST",  headers: {'Content-Type': 'application/json'},body: JSON.stringify(formData), mode : "cors" })
-    .then(response => response.json())
-    .then( data => {
+
+      const user = new User(username, password, null, null);
+    let response = fetch(url, { method: "POST",  headers: {'Content-Type': 'application/json'},body: JSON.stringify(user), mode : "cors" })
+   
+    if(response !=  null){
+      alert("Succeded to add user")
+    }
+    
       
-      console.log('Registration successful:', data);
-      location.replace("./index.html");
-      
-    })
-    .catch(error => {
-      console.log(JSON.stringify(formData))
-      console.error('Registration failed:', error);
-      
-    });
+   
   }
   else{
     document.getElementById('invalidinput').textContent = "Invalid Input";

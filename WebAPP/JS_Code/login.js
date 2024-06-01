@@ -1,6 +1,3 @@
-
-
-
 let username=  ' ';
 let password =  ' ';
 

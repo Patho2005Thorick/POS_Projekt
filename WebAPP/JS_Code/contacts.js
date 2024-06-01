@@ -2,7 +2,7 @@ const baseUrl = 'http://localhost:8080/ThorChat/users/contacts';
 const baseUrl2 = 'http://localhost:8080/ThorChat/users';
 let currentUser = JSON.parse(localStorage.getItem('user')); // Assuming currentUser is an object
 let username = '';
-let currentContacts = currentUser.contactList || []; // Initialize contacts list
+let currentContacts = currentUser.contacts|| []; // Initialize contacts list
 
 document.getElementById('AddUserInput').addEventListener('input', handleInputChange);
 document.addEventListener('DOMContentLoaded', loadContacts);
@@ -36,7 +36,7 @@ async function addContact(event) {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(data),
+                    body: JSON.stringify(currentUser.username + ","+ newContact.username),
                 });
 
                 if (putResponse.ok) {
@@ -61,6 +61,10 @@ function updateContactList(contactName) {
     const contactList = document.getElementById('contact_list_');
     const newContact = document.createElement('li');
     newContact.textContent = contactName;
+    newContact.addEventListener('click', () => {
+        // Assuming you want to pass the contact name to chat.html as a query parameter
+        window.location.href = `chat.html?contact=${encodeURIComponent(contactName)}`;
+    });
     contactList.appendChild(newContact);
 }
 

@@ -26,10 +26,12 @@
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <ListView x:Name="MessagesListView" Margin="10,10,10,100"  Grid.Column="1" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505"/>
-                        <TextBox x:Name="MessageTextBox" Margin="10,310,10,0" VerticalAlignment="Top" Height="50"  Grid.Column="1" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505"/>
+                        <ListView x:Name="MessagesListView" Margin="10,10,10,147"  Grid.Column="1" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505"/>
+                        <TextBox x:Name="MessageTextBox" Margin="10,365,10,0" VerticalAlignment="Top" Height="50"  Grid.Column="1" FontWeight="Bold" BorderBrush="White" BorderThickness="3" Foreground="White" Background="#FF050505"/>
                         <!-- Message input -->
-                        <Button Content="Send" Click="SendButton_Click" Margin="10,397,10,10"  Grid.Column="1" Grid.RowSpan="2" />
+                        <Button Content="Send" Click="SendButton_Click" Margin="10,435,10,10"  Grid.Column="1" />
+                        <Button Content="Delete Chat" Grid.Column="2" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" Click="Delete_Chat" Height="30" Width="86"/>
+
                         <!-- Send button -->
                     </Grid>
                 </Border>

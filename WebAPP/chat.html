@@ -7,17 +7,25 @@
     <link rel="stylesheet" href="chat_style.css">
     <link rel="icon" type="image/png" href="/blue_rose.png">
 </head>
-<body class="chat_background">
+<body class="chat_background" onload = "initializeChat(event)">
     <div class="wrapper">
-        <div class="chat-header">
-            <h2>Chat with <span id="contact-name"></span></h2>
-        </div>
-        <div id="messages-list" class="messages-list"></div>
-        <div class="input-box">
-            <input id="message-input" type="text" placeholder="Type a message" required>
-            <button id="send-button" class="send-button">Send</button>
+        <div class="border">
+            <div class="inner-border">
+                <div class="grid">
+                    <div class="messages-list-container">
+                        <div id="messages-list" class="messages-list"></div>
+                    </div>
+                    <div class="input-container">
+                        <input id="message-input" class="message-input" type="text" placeholder="Type a message" required>
+                        <button id="send-button" type="submit" class="send-button">Send</button>
+                    </div>
+                    <div class="button-container">
+                        <button id="delete-button" class="delete-button">Delete Chat</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="chat.js"></script>
+    <script src="./JS_Code/chat.js"></script>
 </body>
 </html>
