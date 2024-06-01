@@ -1,3 +1,5 @@
+
+
 // Basis-URLs für verschiedene API-Endpunkte
 const baseUrl = 'http://localhost:8080/ThorChat/users';
 const getChatUrl = 'http://localhost:8080/ThorChat/chats';
@@ -7,7 +9,7 @@ const createChatUrl = 'http://localhost:8080/ThorChat/chats/create';
 let contactName;
 let contact = null;
 let currentChat = null;
-
+let currentChatID = null;
 
 // Laden des aktuellen Benutzers aus dem lokalen Speicher
 let currentUser = JSON.parse(localStorage.getItem('user'));
@@ -17,34 +19,29 @@ document.getElementById('send-button').addEventListener('click', sendMessage);
 document.getElementById('delete-button').addEventListener('click', deleteChat);
 
 async function initializeChat(e) {
-    alert(`currentUser: ${JSON.stringify(currentUser)}`);
     e.preventDefault();
     alert('initializeChat called');
     try {
         contactName = new URLSearchParams(window.location.search).get('contact');
         // URL für den Kontaktaufbau
         const contactUrl = `${baseUrl}/${contactName}`;
-        alert(`contactUrl: ${contactUrl}`);
+        
 
         // Abrufen der Kontaktdaten
         const contactResponse = await fetch(contactUrl);
-        alert(`contactResponse status: ${contactResponse.status}`);
-
+      
         if (contactResponse.ok) {
             contact = await contactResponse.json();
-            alert(`contact: ${JSON.stringify(contact)}`);
             // Überprüfen, ob bereits ein gemeinsamer Chat existiert
             let chatFound = false;
             outerLoop:
             for (const id of currentUser.chat_IDs) {
                 for (const id2 of contact.chat_IDs) {
                     if (id === id2) {
-                        alert(`Contact has chatID: ${id}`);
                         const chatResponse = await fetch(`${getChatUrl}/${id}`);
-                        alert(`chatResponse status: ${chatResponse.status}`);
                         if (chatResponse.ok) {
                             currentChat = await chatResponse.json();
-                            alert(`currentChat: ${JSON.stringify(currentChat)}`);
+                            currentChatID = id;
                             currentChat.messages.forEach(message => displayMessage(message.content, message.sender === currentUser.username));
                             chatFound = true;
                             break outerLoop; // Breaks out of both loops
@@ -80,13 +77,25 @@ async function initializeChat(e) {
     } catch (error) {
         alert(`An error occurred: ${error.message}`);
     }
+
+
+    setInterval(checkForUpdates, 5000);
+}
+
+async function checkForUpdates() {
+    const chatResponse = await fetch(`${getChatUrl}/${currentChatID}`);
+    if (chatResponse.ok) {
+        update = await chatResponse.json();
+        if(update.messages.length != currentChat.messages.length){
+            const messagesList = document.getElementById('messages-list') = null;
+            update.messages.forEach(message => displayMessage(update.content, message.sender === currentUser.username));
+        }
+    }
 }
 
 async function sendMessage() {
-    alert('sendMessage called');
     const messageInput = document.getElementById('message-input');
     const messageContent = messageInput.value.trim();
-    alert(`messageContent: ${messageContent}`);
 
     if (messageContent && currentChat) {
         const message = {
@@ -106,7 +115,7 @@ async function sendMessage() {
                 body: JSON.stringify(currentChat)
             });
 
-            alert(`updateChat response status: ${response.status}`);
+         
             if (!response.ok) {
                 alert('Failed to update chat on server.');
             }
@@ -120,7 +129,6 @@ async function sendMessage() {
 }
 
 async function deleteChat() {
-    alert('deleteChat called');
     if (currentChat) {
         const deleteUrl = 'http://localhost:8080/ThorChat/chats/delete';
         alert(`deleteUrl: ${deleteUrl}`);
@@ -134,7 +142,6 @@ async function deleteChat() {
                 body: JSON.stringify({ chatId: currentChat.id, userName: currentUser.username })
             });
 
-            alert(`deleteChat response status: ${response.status}`);
             if (response.ok) {
                 alert('Succeeded to delete the chat.');
                 document.getElementById('messages-list').innerHTML = '';
@@ -149,7 +156,6 @@ async function deleteChat() {
 }
 
 function displayMessage(content, isOwnMessage) {
-    alert(`displayMessage called with content: ${content}, isOwnMessage: ${isOwnMessage}`);
     const messagesList = document.getElementById('messages-list');
     const messageElement = document.createElement('div');
     messageElement.className = isOwnMessage ? 'message own-message' : 'message';

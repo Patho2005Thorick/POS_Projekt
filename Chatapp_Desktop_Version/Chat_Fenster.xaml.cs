@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -26,7 +27,7 @@ namespace Chatapp_Desktop_Version
         private string contactName { get; set; }
         private string userName { get; set; }
         public ObservableCollection<string> Messages { get; set; }
-        private Chat currentchat { get; set; }
+        private Chat currentchat { get; set; } = new Chat();
         private HttpClient httpClient;
         private User currentuser;
         private User contact;
@@ -49,9 +50,39 @@ namespace Chatapp_Desktop_Version
             // Bind Messages to the ListView
             MessagesListView.ItemsSource = Messages;
 
+            Timer timer = new Timer(10000);
+            timer.Elapsed += async (sender, e) => await CheckForUpdates();
+            timer.AutoReset = true;
+            timer.Start();
+
+            
+
         }
 
-        
+        private async Task CheckForUpdates()
+        {
+            string chatUrl = $"{GetChatUrl}/{currentchat.Id}";
+            HttpResponseMessage chatResponse = await httpClient.GetAsync(chatUrl);
+
+            if (chatResponse.IsSuccessStatusCode)
+            {
+                string chatBody = await chatResponse.Content.ReadAsStringAsync();
+                Chat UpdatedChat = JsonSerializer.Deserialize<Chat>(chatBody);
+
+                if(currentchat.Messages.Count != UpdatedChat.Messages.Count) {
+                    Messages = new ObservableCollection<string>();
+                    foreach (Message message in UpdatedChat.Messages)
+                    {
+                        Messages.Add(message.Content);
+                    }
+                }
+
+               
+
+            }
+        }
+
+
 
         private async void function()
         {
