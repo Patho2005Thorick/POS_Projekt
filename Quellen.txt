@@ -1,1 +1,0 @@
-https://stackoverflow.com/questions/27674425/how-to-open-another-html-page-using-javascript
