@@ -1,7 +1,7 @@
 # Dokumentation Semesterprojekt Thor
 
 ## Softwaredesign (Architektur) 
-Das Chat-Programm besteht aus einer Client-Server-Architektur.Diese wurde implementiert mit zwei Clients, einer WPF-Anwendung geschrieben in C# und einer WebApp umgesetzt mit JavaScript, CSS und HTML. Die API (welche auf Spring Boot basiert) nimmt Client Anfragen an via Endpoints und sendet ein Antwort. Die Daten von den Clients werden alle in einer MongoDB-Datenbank gespeichert.
+Das Chat-Programm besteht aus einer Client-Server-Architektur.Diese wurde implementiert mit zwei Clients, einer WPF-Anwendung geschrieben in C# und einer WebApp umgesetzt mit JavaScript, CSS und HTML. Die API (welche auf Spring Boot basiert) nimmt Client Anfragen an via Endpoints und sendet eine Antwort. Die Daten von den Clients werden alle in einer MongoDB-Datenbank gespeichert.
 
 ```mermaid
 graph TD;
