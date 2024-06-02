@@ -21,40 +21,37 @@ Hier wird jetzt die Funktionsweise des Frontends in Detail durchgegangen. Weil b
 #### Login
 
 ![Frontend Login bei den WPF-Client](./Bilder/Login.png)
-In dem Eingabefeld mit den Titel **"Username"** gibt man den Benutzernamen des zu verwendeten Users ein
-In dem Eingabefeld mit dem Titel **"Password"** gibt man das Passwort des zu verwendeten Users ein
-Wenn man auf den **Register** Link drückt, dann wird man zum Registrieren-Fenster weitergeleitet
-Wenn man auf den auf **'Login'** Button drückt, dann wird überprüft, ob der User existiert und ob das Passwort stimmt
+In dem Eingabefeld mit den Titel **"Username"** gibt man den Benutzernamen des zu verwendeten Users ein.
+In dem Eingabefeld mit dem Titel **"Password"** gibt man das Passwort des zu verwendeten Users ein.
+Wenn man auf den **Register** Link drückt, dann wird man zum Registrieren-Fenster weitergeleitet.
+Wenn man auf den auf **'Login'** Button drückt, dann wird überprüft, ob der User existiert und ob das Passwort stimmt.
 
 #### Registrieren
 
 ![Frontend Registrieren bei den WPF-Client](./Bilder/Register.png)
-In dem Eingabefeld mit dem Titel **"Username"** gibt man den Benutzernamemn des neu zu erstellenden Users ein
-In dem Eingabefeld mit dem Titel **"Password"** gibt man das Passwort des neu zu erstellenden Userss ein
-Wenn man auf den **Einloggen** Knopf drückt, dann wird man zum Einloggen-Fenster weitergeleitet<
-Wenn man auf den **Passwort vergessen?** Knopf drückt, dann wird man zum PasswortForgotten-Fenster weitergeleitet
-Wenn man auf den **Konto löschen** Knopf drückt, dann wird man zum BenutzerLöschen-Fenster weitergeleitet
-Wenn man in dem Passwort-Feld auf **'Enter'** drückt, dann wird überprüft, ob noch kein Benutzer mit diesem Namen existiert
+In dem Eingabefeld mit dem Titel **"Username"** gibt man den Benutzernamen des neu zu erstellenden Users ein.
+In dem Eingabefeld mit dem Titel **"Password"** gibt man das Passwort des neu zu erstellenden Users ein.
+Wenn man auf den **Register** Knopf drückt, dann wird ein neuer User erstellt.
 
 #### Kontakte
 
 ![Frontend Kontakansicht bei den WPF-Client](./Bilder/Kontakte.png)
-In den leeren Eingabefeld gibt man den gesuchten Namen eines neuen Kontakts ein
-Wenn man auf den **Add Contact** Knopf drückt, wird ein neuer Kontakt hinzugefügt wenn ein User mit den gesuchten Namen existiert
-Wenn man auf einen der Namen in der Kontaktliste drückt, dann wird ein Chatfenster geöffnet
+In den leeren Eingabefeld gibt man den gesuchten Namen eines neuen Kontakts ein.
+Wenn man auf den **Add Contact** Knopf drückt, wird ein neuer Kontakt hinzugefügt wenn ein User mit den gesuchten Namen existiert.
+Wenn man auf einen der Namen in der Kontaktliste drückt, dann wird ein Chatfenster geöffnet.
 
 #### Chatfenster
 
 ![Frontend Chatfenster bei den WPF-Client](./Bilder/Chat.png)
-In den leeren Eingabefeld gibt man seine Nachricht ein
-Wenn man auf den **Send** Knopf drückt, wird die Nachricht vom User versendet
-Wenn man auf den **Delete Chat** Knopf drückt, dann wird die aktuelle Chat-ID gelöscht aus der Chat_ID Liste des Users. Der Andere Chatteilnehmer kann aber immer noch auf den Chat zugreifen
+In den leeren Eingabefeld gibt man seine Nachricht ein.
+Wenn man auf den **Send** Knopf drückt, wird die Nachricht vom User versendet.
+Wenn man auf den **Delete Chat** Knopf drückt, dann wird die aktuelle Chat-ID gelöscht aus der Chat_ID Liste des Users. Der Andere Chatteilnehmer kann aber immer noch auf den Chat zugreifen.
 
 
 
 ## API-Beschreibung 
 
-Die API ist eine Spring Boot Rest API welche über Endpoints zugriff auf ihre Funktionen ermöglicht auf ihre Funktionen. Diesen Funktionen werden entweder Pfadvariablen oder Requestbodies übergeben, welche dann von den Funktionen verarbeitet werden. Die API sendet nach Ausführung der jeweiligen Funtkion, den jeweiligen CLient eine Antwort ob die von ihm erwünschte Funktion das gewollte ausführen konnte.
+Die API ist eine Spring Boot Rest API welche über Endpoints zugriff auf ihre Funktionen ermöglicht. Diesen Funktionen werden entweder Pfadvariablen oder Requestbodies übergeben, welche dann von den Funktionen verarbeitet werden. Die API sendet nach Ausführung der jeweiligen Funtkion, den jeweiligen CLient eine Antwort ob die von ihm erwünschte Funktion das gewollte ausführen konnte.
 
 ### Beispiel für einen Endpoint
 <!-- Genereller Endpoint der API-->
@@ -92,7 +89,7 @@ Die API ist eine Spring Boot Rest API welche über Endpoints zugriff auf ihre Fu
     "username": Beispiel-Name-Kontakt,
     "password": Beispiel-Password,
     "chat_IDs": Beispiel-ChatID-Liste,
-    "contacts":
+    "contacts": Beispiel-Kontakte-Liste,
   }
   ```
 </details>
@@ -228,11 +225,11 @@ classDiagram
 
 ## Diskussion der Ergebnisse
 
-Nach 3 Monaten Projektarbeit konnte eine funktionierende Chatapp names ThorChat programmiert werden, die ich Ihnen nun präsentieren kann und es konnten fast alle Projektziele erfüllt werden, welche am Anfang des Projekts gesetzt wurden. Es war aufgrund von Zeitmangels und wegen des damit verbundenen Aufwandes war es nicht möglich bis zum Projektende es zu ermöglichen mit der Chatapp Videos, Gifs und Emojies zu versenden. Die geplante Funktionalität der Auswahl eines Dark und Lightmodes musste für die Sicherstellung der Fertigstellung der Wichtigsten Funktionen, der Chatapp bevor Projektendes auf Eisgelegt werden. 
+Nach 3 Monaten Projektarbeit konnte eine funktionierende Chatapp names ThorChat programmiert werden, die ich Ihnen nun präsentieren kann und es konnten fast alle Projektziele erfüllt werden, welche am Anfang des Projekts gesetzt wurden. Es war aufgrund von Zeitmangels und wegen des damit verbundenen Aufwandes nicht möglich bis zum Projektende mit der Chatapp Videos, Gifs und Emojies zu versenden. Die geplante Funktionalität der Auswahl eines Dark und Lightmodes musste für die Sicherstellung der Fertigstellung der Wichtigsten Funktionen, der Chatapp bevor Projektendes vorersts auf Eisgelegt werden. 
 
 ### Zusammenfassung
 
-ThorChat stellt eine intuitive Benutzeroberfläche für sämtliche Platformen zur Verfügung. Die Spring-Boot REST-API ermöglicht eine Kommunikation zwischen den Clients und der Datenbank.
+ThorChat stellt eine intuitive Benutzeroberfläche für sämtliche Plattformen zur Verfügung. Die Spring-Boot REST-API ermöglicht eine Kommunikation zwischen den Clients und der Datenbank.
 
 ### Hintergründe
 
@@ -240,7 +237,7 @@ Während der Entwicklungszeit der Chatapp wurde der Fokus auf ein intuitives Ben
 
 ### Ausblicke
 
-In Zukünftigen Version soll die Chatapp auch Dateienübertragung (Video, Fotos, Gifs) sowie Emojies unterstützen. Des weiteren sollte es die Wahl zwischen einen Light und Darkmode geben. Weiters ist eine Homesite für die Chatapp geplant, die es ermöglichen soll auf jede Funktionalität der Chatapp zuzugreifen und davon zurück zukehren. Dies wäre eine Abkehr des aktuellen sehr linearen Aufbaus der Chatapp
+In einer zukünftigen Version soll die Chatapp auch Dateienübertragung (Video, Fotos, Gifs) sowie Emojies unterstützen. Des weiteren sollte es die Wahl zwischen einen Light und Darkmode geben. Weiters ist eine Homesite für die Chatapp geplant, die es ermöglichen soll auf jede Funktionalität der Chatapp zuzugreifen und davon zurück zukehren. Dies wäre eine Abkehr des aktuellen sehr linearen Aufbaus der Chatapp
 
 
 
