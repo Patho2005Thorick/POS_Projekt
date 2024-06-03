@@ -14,12 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.Json;
 
-
 namespace Chatapp_Desktop_Version
 {
-    /// <summary>
-    /// Interaktionslogik für Registration.xaml
-    /// </summary>
     public partial class Registration : Window
     {
         public Registration()
@@ -29,13 +25,15 @@ namespace Chatapp_Desktop_Version
 
         private async void Registration_(object sender, RoutedEventArgs e)
         {
-
+            // Holen des Benutzernamens und Passworts aus den Eingabefeldern
             string username = Username.Text;
             string password = Password.Password;
-            
+
+            // Löschen der Eingabefelder
             Username.Text = "";
             Password.Password = "";
-         
+
+            // Überprüfen, ob Benutzername und Passwort nicht leer sind
             if (!string.IsNullOrWhiteSpace(username) && !string.IsNullOrWhiteSpace(password))
             {
                 try
@@ -44,8 +42,8 @@ namespace Chatapp_Desktop_Version
                     User user = new User();
                     user.UserName = username;
                     user.Password = password;
-                 
 
+                    // Senden der Benutzerdaten an die API
                     using (var httpClient = new HttpClient())
                     {
                         var json = JsonSerializer.Serialize(user);
@@ -53,31 +51,30 @@ namespace Chatapp_Desktop_Version
 
                         var response = await httpClient.PostAsync(url, content);
 
+                        // Behandlung der Antwort der API
                         if (response.IsSuccessStatusCode)
                         {
                             var responseData = await response.Content.ReadAsStringAsync();
-                            MessageBox.Show("Registration successful: " + responseData);
+                            MessageBox.Show("Registrierung erfolgreich: " + responseData);
                             MainWindow main = new MainWindow();
                             Close();
                             main.Show();
                         }
                         else
                         {
-                            MessageBox.Show("Registration failed. Status Code: " + response.StatusCode);
+                            MessageBox.Show("Registrierung fehlgeschlagen. Status Code: " + response.StatusCode);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Registration failed: " + ex.Message);
+                    Console.WriteLine("Registrierung fehlgeschlagen: " + ex.Message);
                 }
             }
             else
             {
-                Console.WriteLine("Invalid Input");
+                Console.WriteLine("Ungültige Eingabe");
             }
-
-
         }
     }
 }

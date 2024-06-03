@@ -20,9 +20,7 @@ using System.Collections.ObjectModel;
 
 namespace Chatapp_Desktop_Version
 {
-    /// <summary>
-    /// Interaktionslogik für Contacts.xaml
-    /// </summary>
+   
     public partial class Contacts : Window
     {
         private User user = new User();
@@ -44,47 +42,34 @@ namespace Chatapp_Desktop_Version
             InitializeComponent();
             user = currentuser;
 
+            // Füge vorhandene Kontakte der Listbox hinzu
             foreach (string contact in user.Contacts)
             {
-              
-               
                 Contactslist.Items.Add(contact);
             }
-           
-           // contacts = new ObservableCollection<string>(user.Contacts);
+
+            // contacts = new ObservableCollection<string>(user.Contacts);
             DataContext = this;
             httpClient = new HttpClient();
-
         }
 
-        
-
+        // Methode zum Hinzufügen eines Kontakts
         private async void Add_Contact_Click(object sender, RoutedEventArgs e)
         {
-
-
             try
             {
                 string newContactString = AddContactInput.Text;
                 AddContactInput.Text = null;
                 string data = user.UserName + "," + newContactString;
 
-
-
-                string requestUrl =  $"{ BaseUrl2}/{newContactString}";
+                string requestUrl = $"{BaseUrl2}/{newContactString}";
 
                 HttpResponseMessage response = await httpClient.GetAsync(requestUrl);
 
                 if (response.IsSuccessStatusCode)
                 {
-
-
                     string responseBody = await response.Content.ReadAsStringAsync();
                     newContact = JsonSerializer.Deserialize<User>(responseBody);
-                    
-
-
-                    // Serialize the data to JSON
 
                     if (!user.Contacts.Contains(newContact.UserName))
                     {
@@ -94,67 +79,41 @@ namespace Chatapp_Desktop_Version
                         Contactslist.Items.Add(newContact.UserName);
                         // ContactsList.Add(newContact.UserName);
 
-
                         if (response1.IsSuccessStatusCode)
                         {
-                            // Handle success
-                            MessageBox.Show("Contact added successfully.");
+                            MessageBox.Show("Kontakt erfolgreich hinzugefügt.");
                         }
                         else
                         {
-                            // Handle failure
-                            MessageBox.Show("Failed to add contact.");
+                            MessageBox.Show("Fehler beim Hinzufügen des Kontakts.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Contact allready exists");
-                        foreach (string contact in user.Contacts)
-                        {
-                            MessageBox.Show(contact);
-                        }
-                        
+                        MessageBox.Show("Kontakt existiert bereits.");
                     }
-                      
-
-                        
                 }
                 else
                 {
-                   MessageBox.Show("Contact already exists.");
+                    MessageBox.Show("Kontakt existiert bereits.");
                 }
-
             }
             catch (Exception ex)
             {
-                string s = ex.Message;
-                MessageBox.Show("" + ex);
-
+                MessageBox.Show("Fehler beim Hinzufügen des Kontakts: " + ex.Message);
             }
-
-            
         }
 
-
-
+        // Methode zum Behandeln der Auswahl eines Kontakts aus der Liste
         private void Contactslist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (Contactslist.SelectedItem != null)
             {
                 string selectedContact = Contactslist.SelectedItem.ToString();
-                Chat_Fenster chat_fenster = new Chat_Fenster(user.UserName,selectedContact);
+                Chat_Fenster chat_fenster = new Chat_Fenster(user.UserName, selectedContact);
                 Close();
                 chat_fenster.Show();
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }

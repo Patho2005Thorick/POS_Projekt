@@ -10,49 +10,71 @@ import java.util.List;
 
 @Service
 public class UserService {
+
+    // Automatische Injektion des UserRepository
     @Autowired
     private UserRepository userRepository;
 
-
-    public List<User> getUsers(){
+    /**
+     * Methode zum Abrufen aller Benutzer
+     * @return Liste aller Benutzer
+     */
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-
-    public User getNewContact(String username){
-
+    /**
+     * Methode zum Abrufen eines neuen Kontakts basierend auf dem Benutzernamen
+     * @param username Benutzername des gesuchten Kontakts
+     * @return User-Objekt des gefundenen Kontakts
+     * @throws RescourceNotFoundException wenn der Benutzer nicht gefunden wird
+     */
+    public User getNewContact(String username) {
         List<User> userlist = userRepository.findAll();
-        for (User user_:userlist) {
-            if(user_.getUsername().equals(username)){
-                return user_;
+        for (User user : userlist) {
+            if (user.getUsername().equals(username)) {
+                return user;
             }
         }
-
-        throw new RescourceNotFoundException("The User with the Name " + username + " doesn't exist");
-
+        throw new RescourceNotFoundException("Der Benutzer mit dem Namen " + username + " existiert nicht");
     }
 
-    public User getUser(String username, String password){
-
+    /**
+     * Methode zum Abrufen eines Benutzers basierend auf Benutzername und Passwort
+     * @param username Benutzername des gesuchten Benutzers
+     * @param password Passwort des gesuchten Benutzers
+     * @return User-Objekt des gefundenen Benutzers
+     * @throws RescourceNotFoundException wenn der Benutzer nicht gefunden wird
+     */
+    public User getUser(String username, String password) {
         List<User> userlist = userRepository.findAll();
         User user = userRepository.findByUsername(username);
-        if(user.getPassword().equals(password)){
+        if (user.getPassword().equals(password)) {
             return user;
-        }
-        else{
-            throw new RescourceNotFoundException("The User with the Name " + username + " doesn't exist");
+        } else {
+            throw new RescourceNotFoundException("Der Benutzer mit dem Namen " + username + " existiert nicht");
         }
     }
 
-    public User createUser(User user){
+    /**
+     * Methode zum Erstellen eines neuen Benutzers
+     * @param user Das zu erstellende User-Objekt
+     * @return Das erstellte User-Objekt
+     */
+    public User createUser(User user) {
         return userRepository.save(user);
     }
 
-    public User newContact(String data){
+    /**
+     * Methode zum Hinzufügen eines neuen Kontakts zu einem Benutzer
+     * @param data Kommagetrennte Zeichenkette, die Benutzernamen und neuen Kontaktnamen enthält
+     * @return Das aktualisierte User-Objekt
+     */
+    public User newContact(String data) {
         System.out.println(data);
-        String [] datastrings = data.split(",");
+        String[] datastrings = data.split(",");
         String username = datastrings[0];
-        String newcontactname =  datastrings[1];
+        String newcontactname = datastrings[1];
         username = username.replace("\"", "");
         newcontactname = newcontactname.replace("\"", "");
         System.out.println(username);
@@ -66,14 +88,18 @@ public class UserService {
             userRepository.save(user);
         }
         return user;
-
     }
 
-    public User newChat(String data){
+    /**
+     * Methode zum Hinzufügen eines neuen Chats zwischen Benutzern
+     * @param data Kommagetrennte Zeichenkette, die Benutzernamen, Kontaktnamen und Chat-ID enthält
+     * @return Das aktualisierte User-Objekt
+     */
+    public User newChat(String data) {
         System.out.println(data);
-        String [] datastrings = data.split(",");
+        String[] datastrings = data.split(",");
         String username = datastrings[0];
-        String contactname =  datastrings[1];
+        String contactname = datastrings[1];
         String chat_id = datastrings[2];
         username = username.replace("\"", "");
         contactname = contactname.replace("\"", "");
@@ -89,11 +115,12 @@ public class UserService {
         return user;
     }
 
-
-    public void deleteUser(String username){
-        User user  = userRepository.findByUsername(username);
+    /**
+     * Methode zum Löschen eines Benutzers basierend auf dem Benutzernamen
+     * @param username Der Benutzername des zu löschenden Benutzers
+     */
+    public void deleteUser(String username) {
+        User user = userRepository.findByUsername(username);
         userRepository.delete(user);
     }
-
-
 }

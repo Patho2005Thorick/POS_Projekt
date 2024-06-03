@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+//Chat Klasse
+
 @Document
 public class Chat {
 
